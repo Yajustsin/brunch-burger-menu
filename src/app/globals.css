@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Paper (kraft light) ── */
+  --color-paper-50: #f7efe1;
+  --color-paper-100: #f0e4cd;
+  --color-paper-200: #e6d5b5;
+  --color-paper-300: #d9c299;
+  --color-paper-400: #c9ac7c;
+
+  /* ── Ink (dark navy from the illustrations) ── */
+  --color-ink-900: #16233f;
+  --color-ink-800: #1d2d50;
+  --color-ink-700: #27395f;
+  --color-ink-600: #3a4d75;
+  --color-ink-500: #55688f;
+  --color-ink-400: #7f8fae;
+
+  /* ── Accent (fast-food red) ── */
+  --color-accent-600: #b3372b;
+  --color-accent-500: #c94434;
+
+  /* legacy tokens (admin panel) */
+  --color-navy-950: #05080f;
+  --color-navy-900: #0b1120;
+  --color-navy-800: #121d38;
+  --color-navy-700: #1b2d52;
+  --color-navy-600: #243b6a;
+  --color-navy-500: #2e4a82;
+  --color-navy-400: #4a6fac;
+  --color-navy-300: #7a9dcc;
+  --color-navy-200: #b0c7e2;
+  --color-navy-100: #dce7f4;
+  --color-navy-50: #f0f4fa;
+  --color-kraft-900: #33210e;
+  --color-kraft-800: #5c3d1a;
+  --color-kraft-700: #8a5e2a;
+  --color-kraft-600: #b07b3a;
+  --color-kraft-500: #c99a52;
+  --color-kraft-400: #dbb578;
+  --color-kraft-300: #e8cfa0;
+  --color-kraft-200: #f2e4c8;
+  --color-kraft-100: #faf3e6;
+  --color-kraft-50: #fdf9f2;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Fonts ── */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2") format("woff2");
+  font-weight: 900; font-style: normal; font-display: swap;
 }
 
+html { overflow-x: hidden; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100vw;
+  font-family: "Vazirmatn", sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.35), transparent 45%),
+    var(--color-paper-50);
+  color: var(--color-ink-900);
+  overflow-x: hidden;
 }
+
+/* paper grain */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* ── Utilities ── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.ltr { direction: ltr; unicode-bidi: embed; }
+
+/* ── Item card: paper on paper ── */
+.paper-card {
+  background: rgba(252, 248, 240, 0.92);
+  border: 1.5px solid rgba(22, 35, 63, 0.16);
+  box-shadow: 3px 3px 0 rgba(22, 35, 63, 0.1);
+  position: relative;
+}
+.paper-card:hover {
+  border-color: rgba(22, 35, 63, 0.45);
+  box-shadow: 5px 5px 0 rgba(22, 35, 63, 0.16);
+  transform: translate(-2px, -2px);
+}
+.paper-card:nth-child(even) { transform: rotate(0.4deg); }
+.paper-card:nth-child(odd) { transform: rotate(-0.3deg); }
+.paper-card:nth-child(even):hover, .paper-card:nth-child(odd):hover { transform: translate(-2px,-2px) rotate(0deg); }
+
+/* dotted leader between name and price */
+.leader {
+  flex: 1;
+  min-width: 16px;
+  border-bottom: 2px dotted rgba(22,35,63,0.3);
+  margin: 0 10px 6px;
+  align-self: flex-end;
+}
+
+/* ── Ink divider (hand-drawn feel) ── */
+.ink-line {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--color-ink-800) 0 10px, transparent 10px 16px);
+  opacity: 0.35;
+  border-radius: 2px;
+}
+
+/* ── Header ── */
+.paper-header {
+  background: #f6eee0;
+  border-bottom: 2px solid rgba(22, 35, 63, 0.5);
+}
+
+/* ── Price stamp ── */
+.price-tag {
+  background: linear-gradient(135deg, var(--color-accent-600), var(--color-accent-500));
+  color: var(--color-paper-100);
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: 2px 2px 0 rgba(179,55,43,0.3);
+}
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Bottom sheet ── */
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+.sheet-overlay { animation: overlayIn 0.2s ease-out; }
+.sheet-content { animation: sheetUp 0.35s cubic-bezier(0.22,1,0.36,1); }
+
+/* ── Marquee strip ── */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(50%); } }
+.marquee {
+  background: var(--color-ink-800);
+  color: var(--color-paper-100);
+  overflow: hidden;
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+  direction: ltr;
+}
+
+/* ── Giant outline type behind banner ── */
+.outline-type {
+  -webkit-text-stroke: 1.5px rgba(22,35,63,0.16);
+  color: transparent;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+/* ── Tabs ── */
+.tabs-scroll { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.tabs-scroll > * { scroll-snap-align: center; }
