@@ -73,6 +73,9 @@ function CategoryIcon({ id, className = "" }: { id: string; className?: string }
   }
 }
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const asset = (p: string) => (p && p.startsWith("/") ? BASE + p : p);
+
 function formatPrice(price: number) {
   return price.toLocaleString("fa-IR");
 }
@@ -184,7 +187,7 @@ function MenuItemCard({ item, categoryId, delay = 0 }: { item: MenuItem; categor
       >
         {item.image && (
           <img
-            src={item.image}
+            src={asset(item.image)}
             alt={item.name}
             className="h-[68px] w-[68px] rounded-xl object-cover shrink-0 ring-1 ring-ink-900/15"
           />
@@ -221,7 +224,7 @@ function MenuItemCard({ item, categoryId, delay = 0 }: { item: MenuItem; categor
 
             <div className="p-6 pb-10">
               {item.image && (
-                <img src={item.image} alt={item.name}
+                <img src={asset(item.image)} alt={item.name}
                   className="w-full h-52 rounded-2xl object-cover mb-5 ring-1 ring-ink-900/10" />
               )}
 
@@ -264,8 +267,9 @@ export default function MenuPage() {
   const revealRef = useReveal();
 
   useEffect(() => {
-    fetch("/api/menu")
-      .then((r) => r.json())
+    fetch(BASE + "/api/menu")
+      .then((r) => (r.ok ? r.json() : fetch(BASE + "/menu-data.json").then((x) => x.json())))
+      .catch(() => fetch(BASE + "/menu-data.json").then((x) => x.json()))
       .then((data) => {
         setRestaurant(data.restaurant);
         const cats = (data.categories as Category[]).sort((a, b) => a.order - b.order);
@@ -363,7 +367,7 @@ export default function MenuPage() {
           )}
           <img
             id="cat-banner"
-            src={activeCat.banner || CATEGORY_BANNERS[activeCategory]}
+            src={asset(activeCat.banner || CATEGORY_BANNERS[activeCategory])}
             alt={activeCat.name}
             className="h-44 w-auto object-contain will-change-transform"
           />
