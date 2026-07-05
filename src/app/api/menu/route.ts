@@ -4,7 +4,7 @@ import { isAdmin } from "@/lib/adminCheck";
 import { v4 as uuid } from "uuid";
 
 export async function GET() {
-  const data = readData();
+  const data = await readData();
   return NextResponse.json(data);
 }
 
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const data = readData();
+  const data = await readData();
 
   const categoryItems = data.items.filter((i) => i.categoryId === body.categoryId);
   const maxOrder = categoryItems.length > 0 ? Math.max(...categoryItems.map((i) => i.order)) : 0;
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
   };
 
   data.items.push(newItem);
-  writeData(data);
+  await writeData(data);
   return NextResponse.json(newItem, { status: 201 });
 }
 
@@ -37,11 +37,11 @@ export async function PUT(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const data = readData();
+  const data = await readData();
 
   if (body.restaurant) {
     data.restaurant = { ...data.restaurant, ...body.restaurant };
-    writeData(data);
+    await writeData(data);
     return NextResponse.json(data.restaurant);
   }
 
@@ -50,7 +50,7 @@ export async function PUT(req: NextRequest) {
       const item = data.items.find((i) => i.id === id);
       if (item) item.order = order;
     }
-    writeData(data);
+    await writeData(data);
     return NextResponse.json({ ok: true });
   }
 
@@ -58,7 +58,7 @@ export async function PUT(req: NextRequest) {
   if (idx === -1) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
   data.items[idx] = { ...data.items[idx], ...body };
-  writeData(data);
+  await writeData(data);
   return NextResponse.json(data.items[idx]);
 }
 
@@ -66,8 +66,8 @@ export async function DELETE(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { id } = await req.json();
-  const data = readData();
+  const data = await readData();
   data.items = data.items.filter((i) => i.id !== id);
-  writeData(data);
+  await writeData(data);
   return NextResponse.json({ ok: true });
 }

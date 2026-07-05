@@ -1,8 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAdmin } from "@/lib/adminCheck";
-import path from "path";
-import fs from "fs";
 import { v4 as uuid } from "uuid";
+
+const OWNER = process.env.GITHUB_OWNER || "Yajustsin";
+const REPO = process.env.GITHUB_REPO || "brunch-burger-menu";
+const BRANCH = process.env.GITHUB_BRANCH || "main";
+const TOKEN = process.env.GITHUB_TOKEN || "";
+
+const headers: HeadersInit = {
+  Authorization: `Bearer ${TOKEN}`,
+  Accept: "application/vnd.github+json",
+  "X-GitHub-Api-Version": "2022-11-28",
+};
+
+function extOf(name: string): string {
+  const ext = name.split(".").pop();
+  if (!ext) return "jpg";
+  const e = ext.toLowerCase();
+  return ["jpg", "jpeg", "png", "webp", "gif", "svg"].includes(e) ? e : "jpg";
+}
 
 export async function POST(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -13,14 +29,34 @@ export async function POST(req: NextRequest) {
 
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
+  const filename = `${uuid()}.${extOf(file.name)}`;
+  const uploadPath = `public/uploads/${filename}`;
 
-  const ext = path.extname(file.name) || ".jpg";
-  const filename = `${uuid()}${ext}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
+  const body = {
+    message: "chore: upload image",
+    branch: BRANCH,
+    content: buffer.toString("base64"),
+  };
 
-  if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+  const res = await fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(uploadPath)}?ref=${encodeURIComponent(
+      BRANCH
+    )}`,
+    {
+      method: "PUT",
+      headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }
+  );
 
-  fs.writeFileSync(path.join(uploadDir, filename), buffer);
+  if (!res.ok) {
+    const err = await res.text();
+    return NextResponse.json({ error: `GitHub upload failed: ${res.status} ${err}` }, { status: 500 });
+  }
 
-  return NextResponse.json({ url: `/uploads/${filename}` });
+  const json = await res.json();
+  const url = json.content?.raw_url || `/uploads/${filename}`;
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const clean = url.replace(/^https:\/\/[^/]+\/[^/]+\/[^/]+\/[^/]+\/[^/]+/, base);
+  return NextResponse.json({ url: clean });
 }

@@ -27,7 +27,6 @@ jobs:
       - name: Prepare static data
         run: |
           cp data/menu.json public/menu-data.json
-          rm -rf src/app/api
       - name: Build static export
         run: STATIC_EXPORT=1 npm run build
       - run: touch out/.nojekyll
