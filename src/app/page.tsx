@@ -314,8 +314,8 @@ export default function MenuPage() {
         <div className="pt-5 pb-3 px-5">
           <div className="text-center mb-4">
             <h1 className="text-[28px] font-black tracking-[0.06em] text-ink-900 leading-none">
-              <span className="text-accent-600">B</span>RUNCH{" "}
-              <span className="text-accent-600">B</span>URGER
+              <span style={{ color: "#f5c518" }}>B</span>RUNCH{" "}
+              <span style={{ color: "#f5c518" }}>B</span>URGER
             </h1>
             {restaurant && (
               <p className="ltr text-ink-500 text-[11px] mt-2 tracking-wider">
