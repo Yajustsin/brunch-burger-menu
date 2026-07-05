@@ -1,4 +1,4 @@
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "cafe1234";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "bruch123";
 
 export function verifyPassword(password: string): boolean {
   return password === ADMIN_PASSWORD;
