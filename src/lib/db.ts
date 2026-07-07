@@ -21,6 +21,7 @@ export interface MenuItem {
   ingredients: string;
   available: boolean;
   order: number;
+  discount?: number;
 }
 
 export interface MenuData {

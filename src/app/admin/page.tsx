@@ -123,6 +123,7 @@ function ItemFormModal({
     categoryId: item?.categoryId || categories[0]?.id || "",
     ingredients: item?.ingredients || "",
     image: item?.image || "",
+    discount: item?.discount?.toString() || "",
   });
 
   function handleSubmit(e: React.FormEvent) {
@@ -134,6 +135,7 @@ function ItemFormModal({
       categoryId: form.categoryId,
       ingredients: form.ingredients,
       image: form.image,
+      discount: form.discount ? Number(form.discount) : 0,
     });
   }
 
@@ -158,15 +160,29 @@ function ItemFormModal({
           />
         </div>
 
-        <div>
-          <label className="text-navy-400 text-sm block mb-1">قیمت (تومان)</label>
-          <input
-            type="number"
-            value={form.price}
-            onChange={(e) => setForm({ ...form, price: e.target.value })}
-            required
-            className="w-full rounded-xl bg-navy-800 border border-navy-700 text-navy-100 px-4 py-2.5 outline-none focus:border-navy-500"
-          />
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-navy-400 text-sm block mb-1">قیمت (تومان)</label>
+            <input
+              type="number"
+              value={form.price}
+              onChange={(e) => setForm({ ...form, price: e.target.value })}
+              required
+              className="w-full rounded-xl bg-navy-800 border border-navy-700 text-navy-100 px-4 py-2.5 outline-none focus:border-navy-500"
+            />
+          </div>
+          <div>
+            <label className="text-navy-400 text-sm block mb-1">تخفیف (درصد)</label>
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={form.discount}
+              onChange={(e) => setForm({ ...form, discount: e.target.value })}
+              placeholder="مثلا ۱۰"
+              className="w-full rounded-xl bg-navy-800 border border-navy-700 text-navy-100 px-4 py-2.5 outline-none focus:border-navy-500"
+            />
+          </div>
         </div>
 
         <div>
@@ -607,7 +623,14 @@ export default function AdminPage() {
                   {/* Info */}
                   <div className="flex-1 min-w-0">
                     <p className="text-navy-100 font-medium truncate">{item.name}</p>
-                    <p className="text-navy-400 text-sm">{formatPrice(item.price)} تومان</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-navy-400 text-sm">{formatPrice(item.price)} تومان</p>
+                      {item.discount ? (
+                        <span className="text-[10px] bg-red-950 text-red-400 px-1.5 py-0.5 rounded font-bold">
+                          {item.discount}٪ تخفیف
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
 
                   {/* Actions */}

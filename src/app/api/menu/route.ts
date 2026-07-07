@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
     ingredients: body.ingredients || "",
     available: true,
     order: maxOrder + 1,
+    discount: body.discount ? Number(body.discount) : 0,
   };
 
   data.items.push(newItem);
@@ -57,7 +58,16 @@ export async function PUT(req: NextRequest) {
   const idx = data.items.findIndex((i) => i.id === body.id);
   if (idx === -1) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  data.items[idx] = { ...data.items[idx], ...body };
+  // Handle number type conversion for discount if updated
+  const updatedItem = { ...body };
+  if (updatedItem.discount !== undefined) {
+    updatedItem.discount = Number(updatedItem.discount) || 0;
+  }
+  if (updatedItem.price !== undefined) {
+    updatedItem.price = Number(updatedItem.price);
+  }
+
+  data.items[idx] = { ...data.items[idx], ...updatedItem };
   await writeData(data);
   return NextResponse.json(data.items[idx]);
 }

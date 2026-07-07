@@ -178,6 +178,9 @@ function useReveal() {
 function MenuItemCard({ item, categoryId, delay = 0 }: { item: MenuItem; categoryId: string; delay?: number }) {
   const [open, setOpen] = useState(false);
 
+  const hasDiscount = !!item.discount && item.discount > 0 && item.discount <= 100;
+  const discountedPrice = hasDiscount ? Math.round(item.price * (1 - item.discount! / 100)) : item.price;
+
   return (
     <>
       <button
@@ -195,9 +198,23 @@ function MenuItemCard({ item, categoryId, delay = 0 }: { item: MenuItem; categor
 
         <div className="flex-1 min-w-0 py-0.5">
           <div className="flex items-center">
-            <h3 className="font-bold text-ink-900 text-[15px] leading-6 shrink-0">{item.name}</h3>
+            <div className="flex items-center gap-1.5 shrink-0">
+              <h3 className="font-bold text-ink-900 text-[15px] leading-6">{item.name}</h3>
+              {hasDiscount && (
+                <span className="bg-accent-600 text-paper-50 text-[10px] px-1.5 py-0.5 rounded-md font-black animate-pulse">
+                  {item.discount}٪
+                </span>
+              )}
+            </div>
             <span className="leader" />
-            <span className="price-tag shrink-0">{formatPrice(item.price)}</span>
+            <div className="flex flex-col items-end shrink-0 gap-0.5">
+              {hasDiscount && (
+                <span className="text-ink-400 line-through text-[11px] font-medium leading-none">
+                  {formatPrice(item.price)}
+                </span>
+              )}
+              <span className="price-tag shrink-0">{formatPrice(discountedPrice)}</span>
+            </div>
           </div>
           {item.ingredients && (
             <p className="text-ink-500 text-[11px] mt-1.5 line-clamp-1 leading-5">
@@ -229,11 +246,25 @@ function MenuItemCard({ item, categoryId, delay = 0 }: { item: MenuItem; categor
               )}
 
               <div className="flex items-start justify-between gap-4 mb-5">
-                <h2 className="text-xl font-black text-ink-900">{item.name}</h2>
-                <span className="price-tag text-sm">
-                  {formatPrice(item.price)}
-                  <span className="font-normal text-[10px] opacity-70 mr-1">تومان</span>
-                </span>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-xl font-black text-ink-900">{item.name}</h2>
+                  {hasDiscount && (
+                    <span className="bg-accent-600 text-paper-50 text-xs px-2 py-0.5 rounded-md font-black">
+                      {item.discount}٪ تخفیف
+                    </span>
+                  )}
+                </div>
+                <div className="flex flex-col items-end gap-1">
+                  {hasDiscount && (
+                    <span className="text-ink-400 line-through text-xs font-bold">
+                      {formatPrice(item.price)}
+                    </span>
+                  )}
+                  <span className="price-tag text-sm">
+                    {formatPrice(discountedPrice)}
+                    <span className="font-normal text-[10px] opacity-70 mr-1">تومان</span>
+                  </span>
+                </div>
               </div>
 
               <div className="bg-white/40 rounded-xl p-4 border border-ink-900/10">
