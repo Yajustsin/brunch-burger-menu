@@ -60,7 +60,8 @@
       "image": "/uploads/0bc72f0d-d0c0-43a2-a49e-10906fb14a63.jpeg",
       "ingredients": "کوفته گوشت رانده، سس، سبزیجات، نان برگر برانچ",
       "available": true,
-      "order": 1
+      "order": 1,
+      "discount": 20
     },
     {
       "id": "b2",
