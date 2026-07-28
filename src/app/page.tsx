@@ -344,10 +344,13 @@ export default function MenuPage() {
       <header className="sticky top-0 z-40 paper-header">
         <div className="pt-5 pb-3 px-5">
           <div className="text-center mb-4">
-            <h1 className="text-[28px] font-black tracking-[0.06em] text-ink-900 leading-none">
+            <h1 className="text-base font-bold text-ink-800 mb-1.5">
+              منوی آنلاین برانچ برگر
+            </h1>
+            <div className="text-[28px] font-black tracking-[0.06em] text-ink-900 leading-none">
               <span style={{ color: "#f5c518" }}>B</span>RUNCH{" "}
               <span style={{ color: "#f5c518" }}>B</span>URGER
-            </h1>
+            </div>
             {restaurant && (
               <p className="ltr text-ink-500 text-[11px] mt-2 tracking-wider">
                 {restaurant.phone.join("  ·  ")}

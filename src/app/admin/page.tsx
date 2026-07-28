@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import Link from "next/link";
 import type { Category, MenuItem, RestaurantInfo } from "@/lib/db";
 
 // ─── helpers ───
@@ -329,10 +330,6 @@ export default function AdminPage() {
       .catch(() => setChecking(false));
   }, [load]);
 
-  useEffect(() => {
-    if (authed) load();
-  }, [authed, load]);
-
   async function saveRestaurant() {
     if (!rest) return;
     await fetch("/api/menu", {
@@ -473,9 +470,9 @@ export default function AdminPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-bold text-ink-900">پنل مدیریت</h1>
-        <a href="/" className="text-navy-400 text-sm hover:text-navy-200 transition">
+        <Link href="/" className="text-navy-400 text-sm hover:text-navy-200 transition">
           مشاهده منو ←
-        </a>
+        </Link>
       </div>
 
       {/* Restaurant texts */}
