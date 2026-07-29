@@ -80,12 +80,6 @@ function formatPrice(price: number) {
   return price.toLocaleString("fa-IR");
 }
 
-const CATEGORY_NOTES: Record<string, string> = {
-  "cat-burgers": "تمامی برگرها همراه با سیب زمینی",
-  "cat-pizza-american": "۲۸ سانتی‌متر",
-  "cat-pizza-neapolitan": "۳۲ سانتی‌متر",
-};
-
 const CATEGORY_BANNERS: Record<string, string> = {
   "cat-burgers": "/uploads/banners/burger.png",
   "cat-sandwich": "/uploads/banners/sandwich.png",
@@ -332,7 +326,6 @@ export default function MenuClient({ initialData }: { initialData: MenuData }) {
     .sort((a, b) => a.order - b.order);
 
   const activeCat = categories.find((c) => c.id === activeCategory);
-  const catNote = activeCategory ? CATEGORY_NOTES[activeCategory] : null;
 
   return (
     <div className="flex-1 flex flex-col max-w-lg mx-auto w-full relative z-10" ref={revealRef}>
@@ -410,9 +403,6 @@ export default function MenuClient({ initialData }: { initialData: MenuData }) {
           <div className="flex items-center justify-between">
             <h2 className="font-black text-ink-900 text-xl">{activeCat.name}</h2>
             <div className="flex items-center gap-2">
-              {catNote && (
-                <span className="text-accent-600 text-[11px] font-bold">{catNote}</span>
-              )}
               {activeCat.nameEn && (
                 <span className="text-ink-400 text-[10px] font-bold tracking-widest uppercase">
                   {activeCat.nameEn}
