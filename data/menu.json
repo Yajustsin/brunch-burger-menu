@@ -350,10 +350,11 @@
       "categoryId": "cat-pizza-neapolitan",
       "name": "چیکن پستو",
       "price": 890,
-      "image": "",
+      "image": "/uploads/35bf0472-b834-4caa-a52a-1553ad86fd95.png",
       "ingredients": "فیله مرغ مزه‌دار شده، سس پستو، پنیر موزارلا",
       "available": true,
-      "order": 5
+      "order": 5,
+      "discount": 0
     },
     {
       "id": "pn6",
