@@ -454,10 +454,11 @@
       "categoryId": "cat-appetizer",
       "name": "نان سیر",
       "price": 380,
-      "image": "",
+      "image": "/uploads/cdd28bbf-2dfc-446f-a549-73bb1aae4b67.webp",
       "ingredients": "",
       "available": true,
-      "order": 1
+      "order": 1,
+      "discount": 0
     },
     {
       "id": "a2",
