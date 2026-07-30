@@ -168,10 +168,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر جویسی",
       "price": 968,
-      "image": "",
+      "image": "/uploads/2072fb28-0d8c-4cbc-b6ea-46977133051d.webp",
       "ingredients": "۲۰۰ گرم برگر گوشت راسته با مغز پنیر موزارلا، پنیر گودا، سس بیس، نان برگر برانچ",
       "available": true,
-      "order": 11
+      "order": 11,
+      "discount": 0
     },
     {
       "id": "b12",
