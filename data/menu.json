@@ -283,10 +283,11 @@
       "categoryId": "cat-pizza-american",
       "name": "مخلوط",
       "price": 690,
-      "image": "",
+      "image": "/uploads/dc1c0fd3-e218-431f-8db2-777ebcb0cc09.webp",
       "ingredients": "ژامبون گوشت، ژامبون مرغ، هات داگ، قارچ، فلفل دلمه‌ای، پنیر ترکیبی",
       "available": true,
-      "order": 2
+      "order": 2,
+      "discount": 0
     },
     {
       "id": "pa3",
