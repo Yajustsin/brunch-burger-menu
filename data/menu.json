@@ -69,10 +69,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر پنیری",
       "price": 648,
-      "image": "",
+      "image": "/uploads/8c2f6d2f-5e51-45b7-8fc1-bc5ea709cdc7.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، سس بیس، پنیر گودا، نان برگر برانچ",
       "available": true,
-      "order": 2
+      "order": 2,
+      "discount": 0
     },
     {
       "id": "b3",
