@@ -179,10 +179,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر فرانسوی",
       "price": 1080,
-      "image": "",
+      "image": "/uploads/e4b357b3-7e94-428d-85e2-a1f09b402486.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، ۱۵۰ گرم مرغ، پنیر گودا، سس بیس، نان برگر تست شده با پنیر موزارلا",
       "available": true,
-      "order": 12
+      "order": 12,
+      "discount": 0
     },
     {
       "id": "b13",
