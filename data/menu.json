@@ -272,10 +272,11 @@
       "categoryId": "cat-pizza-american",
       "name": "وگن",
       "price": 590,
-      "image": "",
+      "image": "/uploads/392bb57c-dbe2-477c-ac4f-067a954f98aa.webp",
       "ingredients": "کدو مزه‌دار شده، قارچ، سیر، فلفل دلمه‌ای، پنیر ترکیبی",
       "available": true,
-      "order": 1
+      "order": 1,
+      "discount": 0
     },
     {
       "id": "pa2",
