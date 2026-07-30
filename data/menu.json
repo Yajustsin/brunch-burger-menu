@@ -410,10 +410,11 @@
       "categoryId": "cat-pasta",
       "name": "چیکن آلفردو",
       "price": 650,
-      "image": "",
+      "image": "/uploads/f0ad71d7-d266-486d-a9c7-e60010933d0e.webp",
       "ingredients": "",
       "available": true,
-      "order": 1
+      "order": 1,
+      "discount": 0
     },
     {
       "id": "pt2",
