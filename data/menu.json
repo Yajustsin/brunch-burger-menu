@@ -421,10 +421,11 @@
       "categoryId": "cat-pasta",
       "name": "بیف آلفردو",
       "price": 880,
-      "image": "",
+      "image": "/uploads/a49d5836-8665-46cd-b07a-05d07ec3a159.webp",
       "ingredients": "",
       "available": true,
-      "order": 2
+      "order": 2,
+      "discount": 0
     },
     {
       "id": "pt3",
