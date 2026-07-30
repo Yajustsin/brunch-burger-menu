@@ -190,10 +190,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر اسپشیال برانچ",
       "price": 1480,
-      "image": "",
+      "image": "/uploads/735519df-526b-48fb-950e-6fd60cec69ca.webp",
       "ingredients": "۱۵۰ گرم برگر گوشت راسته، استیک مرغ، چوریتسو، بیکن گوساله، سس برانچ، نان برگر برانچ",
       "available": true,
-      "order": 13
+      "order": 13,
+      "discount": 0
     },
     {
       "id": "b14",
