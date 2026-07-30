@@ -102,10 +102,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر هاوایی",
       "price": 838,
-      "image": "",
+      "image": "/uploads/93017bc0-96d6-43a1-97e0-bec84a8a4aa4.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، اسلایس گریل آناناس، سس هاوایی، نان برگر برانچ",
       "available": true,
-      "order": 5
+      "order": 5,
+      "discount": 0
     },
     {
       "id": "b6",
