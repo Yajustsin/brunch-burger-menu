@@ -113,10 +113,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر چوریتسو",
       "price": 948,
-      "image": "",
+      "image": "/uploads/1085f21f-3b5e-4e62-966a-e95a3d350155.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، چوریتسو، سس بیس، نان برگر برانچ",
       "available": true,
-      "order": 6
+      "order": 6,
+      "discount": 0
     },
     {
       "id": "b7",
