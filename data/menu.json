@@ -432,10 +432,11 @@
       "categoryId": "cat-pasta",
       "name": "چیکن پستو",
       "price": 750,
-      "image": "",
+      "image": "/uploads/e07be8c7-9469-4060-858b-61f9a87fd6b4.webp",
       "ingredients": "",
       "available": true,
-      "order": 3
+      "order": 3,
+      "discount": 0
     },
     {
       "id": "pt4",
