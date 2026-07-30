@@ -135,10 +135,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر بیکن",
       "price": 818,
-      "image": "",
+      "image": "/uploads/a1662493-54a4-419a-9e38-45a39be26311.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، ۳۰ گرم بیکن گوساله، سس بیس، نان برگر برانچ",
       "available": true,
-      "order": 8
+      "order": 8,
+      "discount": 0
     },
     {
       "id": "b9",
