@@ -256,10 +256,11 @@
       "categoryId": "cat-sandwich",
       "name": "سوپر هات داگ",
       "price": 595,
-      "image": "",
+      "image": "/uploads/bf0a985e-7e68-4ee1-8541-75d92568e143.webp",
       "ingredients": "",
       "available": true,
-      "order": 5
+      "order": 5,
+      "discount": 0
     },
     {
       "id": "s6",
