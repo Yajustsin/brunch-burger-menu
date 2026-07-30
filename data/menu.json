@@ -212,10 +212,11 @@
       "categoryId": "cat-sandwich",
       "name": "بیکن گوساله",
       "price": 485,
-      "image": "",
+      "image": "/uploads/3b5f773a-c171-41d8-ba51-15545e215f34.webp",
       "ingredients": "(سرد)",
       "available": true,
-      "order": 1
+      "order": 1,
+      "discount": 0
     },
     {
       "id": "s2",
