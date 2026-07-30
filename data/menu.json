@@ -234,10 +234,11 @@
       "categoryId": "cat-sandwich",
       "name": "ژامبون گوشت",
       "price": 285,
-      "image": "",
+      "image": "/uploads/23c73452-ba9c-4b1b-8490-19676cdb8296.webp",
       "ingredients": "(سرد)",
       "available": true,
-      "order": 3
+      "order": 3,
+      "discount": 0
     },
     {
       "id": "s4",
