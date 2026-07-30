@@ -201,10 +201,11 @@
       "categoryId": "cat-burgers",
       "name": "برگر ساده",
       "price": 390,
-      "image": "",
+      "image": "/uploads/5214f470-f60c-4b79-97d9-f96c32fb850f.webp",
       "ingredients": "برگر شرکتی ۹۰ درصد، سس بیس، نان برگر برانچ",
       "available": true,
-      "order": 14
+      "order": 14,
+      "discount": 0
     },
     {
       "id": "s1",
