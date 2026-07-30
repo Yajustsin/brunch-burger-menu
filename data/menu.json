@@ -223,10 +223,11 @@
       "categoryId": "cat-sandwich",
       "name": "سالامی",
       "price": 565,
-      "image": "",
+      "image": "/uploads/b4af8d12-fcf7-468f-ad47-bcf60b198c99.webp",
       "ingredients": "(سرد)",
       "available": true,
-      "order": 2
+      "order": 2,
+      "discount": 0
     },
     {
       "id": "s3",
