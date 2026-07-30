@@ -443,10 +443,11 @@
       "categoryId": "cat-pasta",
       "name": "بیف پستو",
       "price": 980,
-      "image": "",
+      "image": "/uploads/385b261d-783b-4799-ab34-2ed458893e7f.webp",
       "ingredients": "",
       "available": true,
-      "order": 4
+      "order": 4,
+      "discount": 0
     },
     {
       "id": "a1",
