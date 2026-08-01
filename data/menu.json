@@ -495,10 +495,11 @@
       "categoryId": "cat-fries",
       "name": "سیب ساده",
       "price": 270,
-      "image": "",
+      "image": "/uploads/0b5635bc-f036-452c-99c9-e67f85bf0a8d.webp",
       "ingredients": "",
       "available": true,
-      "order": 1
+      "order": 1,
+      "discount": 0
     },
     {
       "id": "f2",
