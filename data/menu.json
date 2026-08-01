@@ -80,7 +80,7 @@
       "categoryId": "cat-burgers",
       "name": "برگر ماشروم",
       "price": 798,
-      "image": "/uploads/5209c4f9-7123-45ef-9c53-248fd48f1070.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/d5407313-dda9-478b-9ea9-1f18a0df105f.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، سس بیس، سس قارچ، نان برگر برانچ",
       "available": true,
       "order": 3,
