@@ -344,7 +344,7 @@
       "categoryId": "cat-pizza-neapolitan",
       "name": "پپرونی",
       "price": 695,
-      "image": "/uploads/2fe78cba-7a9d-4a35-ade5-21ed314ecd37.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/b20210c2-4576-43ff-8ecb-1a39376170b4.webp",
       "ingredients": "ژامبون پپرونی، سس مخصوص پامادورو، پنیر موزارلا",
       "available": true,
       "order": 2,
