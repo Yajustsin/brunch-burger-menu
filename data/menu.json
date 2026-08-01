@@ -388,7 +388,7 @@
       "categoryId": "cat-pizza-neapolitan",
       "name": "سیر و استیک",
       "price": 910,
-      "image": "/uploads/a0c89547-8ef9-49fa-b2de-4e2c95ba1145.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/7702fda2-5668-4b90-b55a-ec355baf1061.webp",
       "ingredients": "گوشت راسته گوساله مزه‌دار شده، سس مخصوص پامادورو، پنیر موزارلا",
       "available": true,
       "order": 6,
