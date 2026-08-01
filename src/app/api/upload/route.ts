@@ -1,62 +1,96 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isAdmin } from "@/lib/adminCheck";
+import { put } from "@vercel/blob";
 import { v4 as uuid } from "uuid";
+import { deleteBlobImage } from "@/lib/blob";
 
-const OWNER = process.env.GITHUB_OWNER || "Yajustsin";
-const REPO = process.env.GITHUB_REPO || "brunch-burger-menu";
-const BRANCH = process.env.GITHUB_BRANCH || "main";
-const TOKEN = process.env.GITHUB_TOKEN || "";
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ALLOWED_MIME_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "webp"];
 
-const headers: HeadersInit = {
-  Authorization: `Bearer ${TOKEN}`,
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": "2022-11-28",
-};
-
-function extOf(name: string): string {
-  const ext = name.split(".").pop();
-  if (!ext) return "jpg";
-  const e = ext.toLowerCase();
-  return ["jpg", "jpeg", "png", "webp", "gif", "svg"].includes(e) ? e : "jpg";
+function getExtension(filename: string): string {
+  const parts = filename.split(".");
+  if (parts.length < 2) return "";
+  return parts.pop()?.toLowerCase() || "";
 }
 
 export async function POST(req: NextRequest) {
-  if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  const formData = await req.formData();
-  const file = formData.get("file") as File | null;
-  if (!file) return NextResponse.json({ error: "No file" }, { status: 400 });
-
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-  const filename = `${uuid()}.${extOf(file.name)}`;
-  const uploadPath = `public/uploads/${filename}`;
-
-  const body = {
-    message: "chore: upload image",
-    branch: BRANCH,
-    content: buffer.toString("base64"),
-  };
-
-  const res = await fetch(
-    `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(uploadPath)}?ref=${encodeURIComponent(
-      BRANCH
-    )}`,
-    {
-      method: "PUT",
-      headers: { ...headers, "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+  try {
+    if (!(await isAdmin())) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-  );
 
-  if (!res.ok) {
-    const err = await res.text();
-    return NextResponse.json({ error: `GitHub upload failed: ${res.status} ${err}` }, { status: 500 });
+    const formData = await req.formData();
+    const file = formData.get("file") as File | null;
+
+    if (!file) {
+      return NextResponse.json({ error: "فایلی انتخاب نشده است" }, { status: 400 });
+    }
+
+    if (file.size === 0) {
+      return NextResponse.json({ error: "فایل انتخابی صفربایت (خالی) است" }, { status: 400 });
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { error: "حجم فایل نباید بیشتر از ۵ مگابایت باشد" },
+        { status: 400 }
+      );
+    }
+
+    const ext = getExtension(file.name);
+    const mimeType = file.type?.toLowerCase() || "";
+
+    const isMimeValid = ALLOWED_MIME_TYPES.includes(mimeType);
+    const isExtValid = ALLOWED_EXTENSIONS.includes(ext);
+
+    if (!isMimeValid && !isExtValid) {
+      return NextResponse.json(
+        { error: "فرمت فایل نامعتبر است. فقط فرمت‌های WebP، PNG و JPG پشتیبانی می‌شوند." },
+        { status: 400 }
+      );
+    }
+
+    const safeExt = isExtValid ? ext : "webp";
+    const filename = `uploads/${uuid()}.${safeExt}`;
+    const contentType = file.type || `image/${safeExt === "jpg" ? "jpeg" : safeExt}`;
+
+    const blob = await put(filename, file, {
+      access: "public",
+      contentType,
+    });
+
+    return NextResponse.json(
+      {
+        url: blob.url,
+        pathname: blob.pathname,
+        size: file.size,
+        contentType,
+      },
+      { status: 200 }
+    );
+  } catch (error: unknown) {
+    const errMessage = error instanceof Error ? error.message : "خطای ناشناخته در آپلود فایل";
+    console.error("Vercel Blob upload error:", error);
+    return NextResponse.json({ error: `خطا در آپلود: ${errMessage}` }, { status: 500 });
   }
+}
 
-  const json = await res.json();
-  const url = json.content?.raw_url || `/uploads/${filename}`;
-  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  const clean = url.replace(/^https:\/\/[^/]+\/[^/]+\/[^/]+\/[^/]+\/[^/]+/, base);
-  return NextResponse.json({ url: clean });
+export async function DELETE(req: NextRequest) {
+  try {
+    if (!(await isAdmin())) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { url } = await req.json();
+    if (!url) {
+      return NextResponse.json({ error: "آدرس فایل مشخص نشده است" }, { status: 400 });
+    }
+
+    await deleteBlobImage(url);
+    return NextResponse.json({ ok: true });
+  } catch (error: unknown) {
+    const errMessage = error instanceof Error ? error.message : "خطا در حذف فایل";
+    return NextResponse.json({ error: errMessage }, { status: 500 });
+  }
 }

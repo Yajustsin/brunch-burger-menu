@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { readData, writeData } from "@/lib/db";
 import { isAdmin } from "@/lib/adminCheck";
 import { v4 as uuid } from "uuid";
+import { deleteBlobImage, isVercelBlobUrl } from "@/lib/blob";
 
 export async function GET() {
   const data = await readData();
@@ -30,8 +31,17 @@ export async function POST(req: NextRequest) {
   };
 
   data.items.push(newItem);
-  await writeData(data);
-  return NextResponse.json(newItem, { status: 201 });
+
+  try {
+    await writeData(data);
+    return NextResponse.json(newItem, { status: 201 });
+  } catch (error) {
+    // If DB write failed, clean up newly uploaded Blob image if any to prevent orphan files
+    if (newItem.image && isVercelBlobUrl(newItem.image)) {
+      await deleteBlobImage(newItem.image);
+    }
+    throw error;
+  }
 }
 
 export async function PUT(req: NextRequest) {
@@ -58,7 +68,10 @@ export async function PUT(req: NextRequest) {
   const idx = data.items.findIndex((i) => i.id === body.id);
   if (idx === -1) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  // Handle number type conversion for discount if updated
+  const oldItem = data.items[idx];
+  const oldImage = oldItem.image;
+
+  // Handle number type conversion for discount and price
   const updatedItem = { ...body };
   if (updatedItem.discount !== undefined) {
     updatedItem.discount = Number(updatedItem.discount) || 0;
@@ -67,9 +80,23 @@ export async function PUT(req: NextRequest) {
     updatedItem.price = Number(updatedItem.price);
   }
 
+  const newImage = updatedItem.image !== undefined ? updatedItem.image : oldItem.image;
   data.items[idx] = { ...data.items[idx], ...updatedItem };
-  await writeData(data);
-  return NextResponse.json(data.items[idx]);
+
+  try {
+    await writeData(data);
+    // After DB save succeeds, if image changed, delete previous image from Blob
+    if (oldImage && oldImage !== newImage && isVercelBlobUrl(oldImage)) {
+      await deleteBlobImage(oldImage);
+    }
+    return NextResponse.json(data.items[idx]);
+  } catch (error) {
+    // If DB save failed and a new Blob image was provided, clean up newly uploaded Blob image
+    if (newImage && newImage !== oldImage && isVercelBlobUrl(newImage)) {
+      await deleteBlobImage(newImage);
+    }
+    throw error;
+  }
 }
 
 export async function DELETE(req: NextRequest) {
@@ -77,7 +104,15 @@ export async function DELETE(req: NextRequest) {
 
   const { id } = await req.json();
   const data = await readData();
+  const itemToDelete = data.items.find((i) => i.id === id);
+
   data.items = data.items.filter((i) => i.id !== id);
   await writeData(data);
+
+  // After DB save succeeds, safely clean up Blob file if present
+  if (itemToDelete?.image && isVercelBlobUrl(itemToDelete.image)) {
+    await deleteBlobImage(itemToDelete.image);
+  }
+
   return NextResponse.json({ ok: true });
 }

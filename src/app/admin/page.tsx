@@ -65,42 +65,102 @@ function ImageUpload({
   onChange: (url: string) => void;
 }) {
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    setError(null);
     setUploading(true);
+
+    if (file.size === 0) {
+      setError("فایل انتخابی صفربایت (خالی) است");
+      setUploading(false);
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("حجم فایل نباید بیشتر از ۵ مگابایت باشد");
+      setUploading(false);
+      return;
+    }
+
     const fd = new FormData();
     fd.append("file", file);
-    const res = await fetch("/api/upload", { method: "POST", body: fd });
-    if (res.ok) {
-      const { url } = await res.json();
-      onChange(url);
+
+    try {
+      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "خطا در آپلود تصویر");
+      } else if (data.url) {
+        onChange(data.url);
+        setError(null);
+      } else {
+        setError("پاسخ آپلود سرور نامعتبر است");
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "خطا در آپلود تصویر";
+      setError(msg);
+    } finally {
+      setUploading(false);
+      e.target.value = "";
     }
-    setUploading(false);
   }
 
   return (
-    <div className="flex items-center gap-3">
-      {current ? (
-        <img src={current} alt="" className="w-16 h-16 rounded-lg object-cover" />
-      ) : (
-        <div className="w-16 h-16 rounded-lg bg-navy-800 flex items-center justify-center text-navy-600 text-xs">
-          بدون عکس
-        </div>
-      )}
-      <label className="cursor-pointer text-sm text-navy-400 hover:text-navy-200 transition">
-        {uploading ? "آپلود..." : "انتخاب عکس"}
-        <input type="file" accept="image/*" className="hidden" onChange={handleFile} />
-      </label>
+    <div className="space-y-2">
+      <div className="flex items-center gap-3">
+        {current ? (
+          <img
+            src={current}
+            alt="پیش‌نمایش تصویر"
+            className="w-16 h-16 rounded-lg object-cover border border-navy-700 bg-navy-800 shrink-0"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+                "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='%23ef4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='2' ry='2'/><circle cx='8.5' cy='8.5' r='1.5'/><polyline points='21 15 16 10 5 21'/></svg>";
+            }}
+          />
+        ) : (
+          <div className="w-16 h-16 rounded-lg bg-navy-800 border border-navy-700/60 flex items-center justify-center text-navy-500 text-xs shrink-0">
+            بدون عکس
+          </div>
+        )}
+        <label className="cursor-pointer text-sm bg-navy-800 border border-navy-700 text-navy-200 hover:text-white hover:bg-navy-700 px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+          {uploading ? (
+            <>
+              <span className="w-3.5 h-3.5 border-2 border-navy-300 border-t-transparent rounded-full animate-spin inline-block" />
+              <span>در حال آپلود...</span>
+            </>
+          ) : (
+            <span>{current ? "تغییر عکس" : "انتخاب عکس"}</span>
+          )}
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/jpg, image/webp"
+            className="hidden"
+            onChange={handleFile}
+            disabled={uploading}
+          />
+        </label>
+        {current && (
+          <button
+            type="button"
+            onClick={() => onChange("")}
+            className="text-red-400 text-xs hover:text-red-300 transition px-2 py-1"
+          >
+            حذف عکس
+          </button>
+        )}
+      </div>
+
+      {error && <p className="text-red-400 text-xs font-medium">{error}</p>}
       {current && (
-        <button
-          type="button"
-          onClick={() => onChange("")}
-          className="text-red-400 text-xs hover:text-red-300"
-        >
-          حذف
-        </button>
+        <p className="text-[10px] text-navy-400 font-mono truncate max-w-full dir-ltr text-right" title={current}>
+          {current}
+        </p>
       )}
     </div>
   );
@@ -126,18 +186,25 @@ function ItemFormModal({
     image: item?.image || "",
     discount: item?.discount?.toString() || "",
   });
+  const [saveError, setSaveError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onSave({
-      ...item,
-      name: form.name,
-      price: Number(form.price),
-      categoryId: form.categoryId,
-      ingredients: form.ingredients,
-      image: form.image,
-      discount: form.discount ? Number(form.discount) : 0,
-    });
+    setSaveError(null);
+    try {
+      await onSave({
+        ...item,
+        name: form.name,
+        price: Number(form.price),
+        categoryId: form.categoryId,
+        ingredients: form.ingredients,
+        image: form.image,
+        discount: form.discount ? Number(form.discount) : 0,
+      });
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "خطا در ذخیره‌سازی آیتم";
+      setSaveError(msg);
+    }
   }
 
   return (
@@ -150,6 +217,12 @@ function ItemFormModal({
         <h2 className="text-lg font-bold text-navy-100">
           {item?.id ? "ویرایش آیتم" : "آیتم جدید"}
         </h2>
+
+        {saveError && (
+          <div className="bg-red-950/60 border border-red-800 text-red-300 text-xs p-3 rounded-xl">
+            {saveError}
+          </div>
+        )}
 
         <div>
           <label className="text-navy-400 text-sm block mb-1">نام</label>
@@ -248,10 +321,17 @@ function CategoryFormModal({
 }) {
   const [name, setName] = useState(category?.name || "");
   const [banner, setBanner] = useState(category?.banner || "");
+  const [saveError, setSaveError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onSave({ ...category, name, banner });
+    setSaveError(null);
+    try {
+      await onSave({ ...category, name, banner });
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "خطا در ذخیره‌سازی دسته‌بندی";
+      setSaveError(msg);
+    }
   }
 
   return (
@@ -264,6 +344,13 @@ function CategoryFormModal({
         <h2 className="text-lg font-bold text-navy-100">
           {category?.id ? "ویرایش دسته‌بندی" : "دسته‌بندی جدید"}
         </h2>
+
+        {saveError && (
+          <div className="bg-red-950/60 border border-red-800 text-red-300 text-xs p-3 rounded-xl">
+            {saveError}
+          </div>
+        )}
+
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -332,50 +419,60 @@ export default function AdminPage() {
 
   async function saveRestaurant() {
     if (!rest) return;
-    await fetch("/api/menu", {
+    const res = await fetch("/api/menu", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ restaurant: rest }),
     });
+    if (!res.ok) {
+      alert("خطا در ذخیره متن‌های اصلی");
+      return;
+    }
     setRestSaved(true);
     setTimeout(() => setRestSaved(false), 2000);
   }
 
   // ─── Item CRUD ───
   async function saveItem(data: Partial<MenuItem>) {
-    if (data.id) {
-      await fetch("/api/menu", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-    } else {
-      await fetch("/api/menu", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+    const res = await fetch("/api/menu", {
+      method: data.id ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      const errJson = await res.json().catch(() => ({}));
+      throw new Error(errJson.error || "خطا در ذخیره‌سازی آیتم");
     }
+
     setItemModal(false);
-    load();
+    await load();
   }
 
   async function deleteItem(id: string) {
     if (!confirm("حذف این آیتم؟")) return;
-    await fetch("/api/menu", {
+    const res = await fetch("/api/menu", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
     });
+    if (!res.ok) {
+      alert("خطا در حذف آیتم");
+      return;
+    }
     load();
   }
 
   async function toggleAvailable(item: MenuItem) {
-    await fetch("/api/menu", {
+    const res = await fetch("/api/menu", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: item.id, available: !item.available }),
     });
+    if (!res.ok) {
+      alert("خطا در تغییر وضعیت موجودی");
+      return;
+    }
     load();
   }
 
@@ -393,40 +490,46 @@ export default function AdminPage() {
       return { id: it.id, order: it.order };
     });
 
-    await fetch("/api/menu", {
+    const res = await fetch("/api/menu", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ reorder }),
     });
+    if (!res.ok) {
+      alert("خطا در جابه‌جایی ترتیب آیتم");
+      return;
+    }
     load();
   }
 
   // ─── Category CRUD ───
   async function saveCategory(data: Partial<Category>) {
-    if (data.id) {
-      await fetch("/api/categories", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-    } else {
-      await fetch("/api/categories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+    const res = await fetch("/api/categories", {
+      method: data.id ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      const errJson = await res.json().catch(() => ({}));
+      throw new Error(errJson.error || "خطا در ذخیره‌سازی دسته‌بندی");
     }
+
     setCatModal(false);
-    load();
+    await load();
   }
 
   async function deleteCategory(id: string) {
     if (!confirm("حذف این دسته‌بندی و تمام آیتم‌هایش؟")) return;
-    await fetch("/api/categories", {
+    const res = await fetch("/api/categories", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
     });
+    if (!res.ok) {
+      alert("خطا در حذف دسته‌بندی");
+      return;
+    }
     load();
   }
 
@@ -441,11 +544,15 @@ export default function AdminPage() {
       return { id: c.id, order: c.order };
     });
 
-    await fetch("/api/categories", {
+    const res = await fetch("/api/categories", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ reorder }),
     });
+    if (!res.ok) {
+      alert("خطا در جابه‌جایی دسته‌بندی");
+      return;
+    }
     load();
   }
 
