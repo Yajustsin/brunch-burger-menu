@@ -267,7 +267,7 @@
       "categoryId": "cat-sandwich",
       "name": "سوپر چیکن",
       "price": 690,
-      "image": "/uploads/5bb91aa1-7d5f-4563-af0b-62895555015e.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/be906bcb-c189-4156-a2c9-7f596e5cd10c.webp",
       "ingredients": "",
       "available": true,
       "order": 6,
