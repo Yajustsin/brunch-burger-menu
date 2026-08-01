@@ -58,7 +58,7 @@
       "categoryId": "cat-burgers",
       "name": "برگر کلاسیک",
       "price": 598,
-      "image": "/uploads/0446c98f-89f5-44c3-b98a-786080fa99de.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/454575ba-b6bf-4886-8895-c401832d076d.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، سس بیس، نان برگر برانچ",
       "available": true,
       "order": 1,
