@@ -311,7 +311,7 @@
       "categoryId": "cat-pizza-american",
       "name": "قارچ و گوشت",
       "price": 780,
-      "image": "/uploads/55fec25f-687a-41bc-b707-a6d02848d55a.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/922c231d-b5cd-402a-8ac4-dc16ee755c33.webp",
       "ingredients": "گوشت گوساله چرخ شده مزه‌دار شده، قارچ، فلفل دلمه‌ای، پنیر ترکیبی",
       "available": true,
       "order": 4,
