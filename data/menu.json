@@ -300,7 +300,7 @@
       "categoryId": "cat-pizza-american",
       "name": "قارچ و مرغ",
       "price": 750,
-      "image": "/uploads/9f3bfa7c-68c7-4938-a5eb-d26ecc9588e7.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/80e8a980-3a96-4a59-b3c6-4731a9787b2e.webp",
       "ingredients": "فیله مرغ طعم‌دار، قارچ، فلفل دلمه‌ای، پنیر ترکیبی",
       "available": true,
       "order": 3,
