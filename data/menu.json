@@ -124,7 +124,7 @@
       "categoryId": "cat-burgers",
       "name": "برگر پپرونی",
       "price": 678,
-      "image": "/uploads/8a4b49f9-e4fd-43f5-ad48-ff4fd4d6e649.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/a5a48c91-7e6a-4db9-b582-cf9ac1882367.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، پپرونی، سس چیلی، نان برگر برانچ",
       "available": true,
       "order": 7,
