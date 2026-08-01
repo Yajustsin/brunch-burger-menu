@@ -146,7 +146,7 @@
       "categoryId": "cat-burgers",
       "name": "برگر چیکن",
       "price": 768,
-      "image": "/uploads/d760bda1-7b75-4e3e-a36a-133304b47fc5.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/867c484b-3991-45d0-a536-1a7ae8f0eb85.webp",
       "ingredients": "۱۵۰ گرم گوشت راسته، ۱۲۰ گرم استیک مرغ مزه‌دار شده، سس بیس، نان برگر برانچ",
       "available": true,
       "order": 9,
