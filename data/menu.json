@@ -465,10 +465,11 @@
       "categoryId": "cat-appetizer",
       "name": "تست سیر و جعفری",
       "price": 190,
-      "image": "",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/ec0ca04b-138e-4909-bb1d-e7e8c4bf7ded.webp",
       "ingredients": "",
       "available": true,
-      "order": 2
+      "order": 2,
+      "discount": 0
     },
     {
       "id": "a3",
