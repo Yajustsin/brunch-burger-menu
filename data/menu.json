@@ -355,7 +355,7 @@
       "categoryId": "cat-pizza-neapolitan",
       "name": "بیکن",
       "price": 820,
-      "image": "/uploads/90a722d9-2734-4000-89a7-b37ba9ee9071.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/0d65a7e2-ae30-4cb3-8040-b2658c287d47.webp",
       "ingredients": "بیکن گوساله، سس مخصوص پامادورو، پنیر موزارلا",
       "available": true,
       "order": 3,
