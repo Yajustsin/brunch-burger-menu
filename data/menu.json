@@ -553,10 +553,11 @@
       "categoryId": "cat-fries",
       "name": "سیب چوریتسو",
       "price": 698,
-      "image": "",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/f3927b83-de89-48d4-a750-52340f50af03.webp",
       "ingredients": "",
       "available": true,
-      "order": 6
+      "order": 6,
+      "discount": 0
     },
     {
       "id": "f7",
