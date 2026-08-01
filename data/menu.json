@@ -476,10 +476,11 @@
       "categoryId": "cat-appetizer",
       "name": "سالاد سزار",
       "price": 680,
-      "image": "",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/91f0e3ea-15d0-40d7-a061-31f681951e3f.webp",
       "ingredients": "",
       "available": true,
-      "order": 3
+      "order": 3,
+      "discount": 0
     },
     {
       "id": "a4",
