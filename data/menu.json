@@ -157,7 +157,7 @@
       "categoryId": "cat-burgers",
       "name": "برگر دبل",
       "price": 1148,
-      "image": "/uploads/0f475e27-73a5-4ea4-9b39-a155f6775a09.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/f75d85b2-d27a-404f-ab4e-6e1faf1deda9.webp",
       "ingredients": "۲ عدد برگر ۱۵۰ گرم گوشت راسته، ۲ عدد پنیر گودا، سس بیس، نان برگر برانچ",
       "available": true,
       "order": 10,
