@@ -399,7 +399,7 @@
       "categoryId": "cat-pizza-neapolitan",
       "name": "سالامی",
       "price": 715,
-      "image": "/uploads/aa9da2dc-277a-47d9-bad0-772f1c9de950.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/2f5bf155-9066-429b-b033-b26f7059c5e1.webp",
       "ingredients": "سالامی، سس مخصوص پامادورو، پنیر موزارلا",
       "available": true,
       "order": 7,
