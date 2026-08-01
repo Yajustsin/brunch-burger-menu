@@ -333,7 +333,7 @@
       "categoryId": "cat-pizza-neapolitan",
       "name": "مارگاریتا",
       "price": 660,
-      "image": "/uploads/824f493c-f8b4-4760-a60c-1b39fecd2120.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/b3d163d9-db1a-4eec-8cdf-0e9d5d1d0a7d.webp",
       "ingredients": "گوجه گیلاسی، سس مخصوص پامادورو، پنیر موزارلا",
       "available": true,
       "order": 1,
