@@ -322,7 +322,7 @@
       "categoryId": "cat-pizza-american",
       "name": "سیر و استیک",
       "price": 875,
-      "image": "/uploads/016d9512-9514-46bb-978d-1bb70d7cc3f0.webp",
+      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/3faba11d-8757-4c18-bd3b-26f40bff7a9c.webp",
       "ingredients": "گوشت راسته گوساله مزه‌دار شده، قارچ، فلفل دلمه‌ای، پنیر ترکیبی",
       "available": true,
       "order": 5,
