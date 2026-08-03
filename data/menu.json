@@ -19,7 +19,7 @@
       "id": "cat-sandwich",
       "name": "ساندویچ",
       "nameEn": "Sandwich",
-      "order": 3
+      "order": 4
     },
     {
       "id": "cat-pizza-american",
@@ -31,7 +31,7 @@
       "id": "cat-pizza-neapolitan",
       "name": "پیتزای ناپولیتن",
       "nameEn": "Neapolitan Pizza",
-      "order": 4
+      "order": 3
     },
     {
       "id": "cat-pasta",
