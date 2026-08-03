@@ -12,7 +12,7 @@
       "id": "cat-burgers",
       "name": "برگر",
       "nameEn": "Burgers",
-      "order": 2,
+      "order": 3,
       "banner": ""
     },
     {
@@ -31,7 +31,7 @@
       "id": "cat-pizza-neapolitan",
       "name": "پیتزای ناپولیتن",
       "nameEn": "Neapolitan Pizza",
-      "order": 3
+      "order": 2
     },
     {
       "id": "cat-pasta",
