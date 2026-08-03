@@ -43,13 +43,13 @@
       "id": "cat-appetizer",
       "name": "پیش غذا",
       "nameEn": "Appetizer",
-      "order": 6
+      "order": 7
     },
     {
       "id": "cat-fries",
       "name": "سیب زمینی",
       "nameEn": "French Fries",
-      "order": 7
+      "order": 6
     }
   ],
   "items": [
