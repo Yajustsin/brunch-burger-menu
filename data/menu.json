@@ -12,14 +12,14 @@
       "id": "cat-burgers",
       "name": "برگر",
       "nameEn": "Burgers",
-      "order": 4,
+      "order": 3,
       "banner": ""
     },
     {
       "id": "cat-sandwich",
       "name": "ساندویچ",
       "nameEn": "Sandwich",
-      "order": 3
+      "order": 4
     },
     {
       "id": "cat-pizza-american",
