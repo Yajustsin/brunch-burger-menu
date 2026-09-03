@@ -277,8 +277,8 @@
     {
       "id": "pa1",
       "categoryId": "cat-pizza-american",
-      "name": "وگن",
-      "price": 590,
+      "name": "کدو اسفناج",
+      "price": 690,
       "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/8fb7dc61-bce0-4aca-9e65-95dead3162df.webp",
       "ingredients": "کدو مزه‌دار شده، قارچ، سیر، فلفل دلمه‌ای، پنیر ترکیبی",
       "available": true,
