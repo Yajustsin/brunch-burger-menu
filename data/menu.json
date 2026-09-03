@@ -363,17 +363,6 @@
       "discount": 0
     },
     {
-      "id": "pn4",
-      "categoryId": "cat-pizza-neapolitan",
-      "name": "چیکن اسفناج",
-      "price": 830,
-      "image": "https://at7jiywfq3i6scdk.public.blob.vercel-storage.com/uploads/6106889f-e9c3-450a-a2c8-2f767f1fbf50.webp",
-      "ingredients": "فیله مرغ مزه‌دار شده، اسفناج، پنیر موزارلا",
-      "available": true,
-      "order": 4,
-      "discount": 0
-    },
-    {
       "id": "pn5",
       "categoryId": "cat-pizza-neapolitan",
       "name": "چیکن پستو",
