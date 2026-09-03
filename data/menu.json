@@ -25,7 +25,8 @@
       "id": "cat-pizza-american",
       "name": "پیتزای آمریکایی",
       "nameEn": "American Pizza",
-      "order": 1
+      "order": 1,
+      "banner": ""
     },
     {
       "id": "cat-pizza-neapolitan",
