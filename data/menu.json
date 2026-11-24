@@ -614,6 +614,17 @@
       "available": true,
       "order": 6,
       "discount": 0
+    },
+    {
+      "id": "6ecc00a9-03aa-40cc-a468-7d04e5a636c1",
+      "categoryId": "cat-fries",
+      "name": "سیب آلفردو",
+      "price": 700,
+      "image": "",
+      "ingredients": "",
+      "available": true,
+      "order": 8,
+      "discount": 0
     }
   ]
 }
