@@ -559,6 +559,17 @@
       "available": true,
       "order": 7,
       "discount": 0
+    },
+    {
+      "id": "a5f73e67-bc6d-476c-81c9-6d3b946c448b",
+      "categoryId": "cat-pizza-neapolitan",
+      "name": "هانی بیکن",
+      "price": 1190,
+      "image": "",
+      "ingredients": "بیکن گوساله .عسل.سیب.سس مخصوص پامادوره.پنیر موتزارلا",
+      "available": true,
+      "order": 8,
+      "discount": 0
     }
   ]
 }
