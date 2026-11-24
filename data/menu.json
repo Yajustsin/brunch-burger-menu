@@ -559,6 +559,17 @@
       "available": true,
       "order": 8,
       "discount": 0
+    },
+    {
+      "id": "c07cb95f-0deb-4ae5-a64d-19810d7a9f8c",
+      "categoryId": "cat-pizza-neapolitan",
+      "name": "بیکن پپرونی",
+      "price": 1090,
+      "image": "",
+      "ingredients": "بیکن گوساله ژامبون پپرونی.سس مخصوص پامادوره.پنیر موتزارلا",
+      "available": true,
+      "order": 9,
+      "discount": 0
     }
   ]
 }
