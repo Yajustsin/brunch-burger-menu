@@ -636,6 +636,17 @@
       "available": true,
       "order": 9,
       "discount": 0
+    },
+    {
+      "id": "efcd6eaa-9809-4323-b7e2-807253ae5df4",
+      "categoryId": "cat-fries",
+      "name": "سیب پستو",
+      "price": 730,
+      "image": "",
+      "ingredients": "",
+      "available": true,
+      "order": 10,
+      "discount": 0
     }
   ]
 }
