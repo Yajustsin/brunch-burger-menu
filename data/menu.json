@@ -625,6 +625,17 @@
       "available": true,
       "order": 8,
       "discount": 0
+    },
+    {
+      "id": "1eee5fde-1289-4891-a0b4-43d84dbc63c8",
+      "categoryId": "cat-fries",
+      "name": "سیب برگر",
+      "price": 1150,
+      "image": "",
+      "ingredients": "",
+      "available": true,
+      "order": 9,
+      "discount": 0
     }
   ]
 }
