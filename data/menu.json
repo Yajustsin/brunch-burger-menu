@@ -570,6 +570,17 @@
       "available": true,
       "order": 9,
       "discount": 0
+    },
+    {
+      "id": "d6a1e175-b5a9-436a-9001-c6287d4268d0",
+      "categoryId": "cat-pizza-neapolitan",
+      "name": "اسپشیال هاوایی",
+      "price": 1600,
+      "image": "",
+      "ingredients": "بیکن گوساله.سوسیس شکاری.آناناس.سس پامادوره.پنیر موتزارلا",
+      "available": true,
+      "order": 10,
+      "discount": 0
     }
   ]
 }
