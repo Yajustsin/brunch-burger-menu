@@ -581,6 +581,17 @@
       "available": true,
       "order": 10,
       "discount": 0
+    },
+    {
+      "id": "99fd5e73-30d7-4de4-97e6-060cb1f350f2",
+      "categoryId": "cat-pizza-neapolitan",
+      "name": "چیکن آلفردو",
+      "price": 1140,
+      "image": "",
+      "ingredients": "فیله مرغ مزه دار شده.سس آلفردو.پنیر موتزارلا",
+      "available": true,
+      "order": 11,
+      "discount": 0
     }
   ]
 }
