@@ -592,6 +592,17 @@
       "available": true,
       "order": 7,
       "discount": 0
+    },
+    {
+      "id": "ecd42592-4b4d-4b6f-be16-534ab062f06c",
+      "categoryId": "cat-pasta",
+      "name": "چیکن پامادوره",
+      "price": 700,
+      "image": "",
+      "ingredients": "",
+      "available": true,
+      "order": 5,
+      "discount": 0
     }
   ]
 }
